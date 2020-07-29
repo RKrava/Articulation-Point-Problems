@@ -1,15 +1,11 @@
-
-/// Time-0.452s
-/// Basic Bridge problem 
-
 #include<bits/stdc++.h>
-
+ 
 #define inf INT_MAX
-
+ 
 using namespace std;
-
+ 
 const int mx=10001;
-
+ 
 vector<int>adj[mx];/// adjacency matrix
 bool visited[mx]={false};/// visited or not ??
 int disc[mx]={0};/// dfs time finding,dfs number of a node
@@ -18,7 +14,7 @@ int parent[mx]={-1};/// -1 holds for Null
 bool apu[mx]={false};/// is the node articular point ?
 vector< pair<int,int> >bridges; /// push back the bridges into a vector
 int articupoints=0;/// the number of articulation points
-
+ 
 void apu_finding(int u)
 {
     ///this parameter will be used for counting discovery time of a node
@@ -62,7 +58,7 @@ void apu_finding(int u)
         {
             bridges.push_back(make_pair(min(v,u),max(v,u)));// storing bridges pair
         }
-
+ 
         }
 /// this means that, visited[v] is true i.e. already v is visited
 /// if u's parent is not v,then this is a back edge , u-v .so we will take low[] time from disc[] time of v
@@ -71,15 +67,15 @@ void apu_finding(int u)
             low[u]=min(low[u],disc[v]);
         }
     }
-
+ 
 }
-
+ 
 bool comp(const pair<int,int>a,const pair<int,int>b)
 {
     if(a.first==b.first) return (a.second<b.second);
     else return (a.first<b.first);
 }
-
+ 
 int main()
 {
    int tc;
@@ -117,7 +113,7 @@ int main()
        }
            for(int p=0;p<V;p++)
            {
-               if(!apu[p])
+               if(!visited[p])
               apu_finding(p);
            }
            sort(bridges.begin(),bridges.end(),comp);
@@ -128,7 +124,7 @@ int main()
            {
                cout<<bridges[j].first<<" - "<<bridges[j].second<<endl;
            }
-
+ 
    }
    return 0;
 }
